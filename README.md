@@ -7,7 +7,6 @@
     * [`mount/2`](#mount2)
     * [`handle_info/2`](#handleinfo2)
     * [`render/1`](#render1)
-  * [Adding the route](#adding-the-route)
   * [`live_render`](#liverender)
 
 A little toy repo to show off a very unnecessarily fast-rendering clock, done with [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view).
