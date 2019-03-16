@@ -1,4 +1,4 @@
-defmodule LiveTinkeringWeb.ClockView do
+defmodule LiveTinkeringWeb.ClockLive do
   use Phoenix.LiveView
 
   # Must be a number greater than or equal to 1

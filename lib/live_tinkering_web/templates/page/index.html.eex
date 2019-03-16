@@ -1,5 +1,5 @@
 <section id="render_target">
   <p>
-    <%= live_render(@conn, LiveTinkeringWeb.ClockView) %>
+    <%= live_render(@conn, LiveTinkeringWeb.ClockLive) %>
   </p>
 </section>

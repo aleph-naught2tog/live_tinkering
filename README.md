@@ -3,7 +3,7 @@
   * [Javascript setup](#javascript-setup)
   * [Elixir setup](#elixir-setup)
 * [Code!](#code)
-  * [`ClockView`](#clockview)
+  * [`ClockLive`](#clocklive)
     * [`mount/2`](#mount2)
     * [`handle_info/2`](#handleinfo2)
     * [`render/1`](#render1)
@@ -138,16 +138,16 @@ Code time! _(Do note that I am doing literally zero error-handling, etc.)_
 
 There are two things we need to do to make our clock in this case:
 
-1. make a `view` module that will contain most of the code today
+1. make a `live` module that will contain most of the code today
 2. add a call to `live_render` to, well, render
 
-### `ClockView`
+### `ClockLive`
 
 If you look in the `views` folder in your web app lib -- usually that is in a folder like `lib/<your_app_name>_web` -- you'll see a number of `.ex` files, all with names like `page_view.ex` or `error_view.ex`.
 
-We want something similar, but in a folder parallel to it called `live`. So, once we have a folder called `lib/<your_app_name>_web/live`, let's go ahead and make our module in there. Since we want to have a module called `ClockView`, we need to make a file in that folder called `clock_view.ex`.
+We want something similar, but in a folder parallel to it called `live`. So, once we have a folder called `lib/<your_app_name>_web/live`, let's go ahead and make our module in there. Just like we want files like `page_view.ex` for the `PageView` module in `views`, we want one called `ClockLive` here, and a file in that folder called `clock_live.ex`.
 
-Our `ClockView` module needs to do a few things:
+Our `ClockLive` module needs to do a few things:
 
 1. `use Phoenix.LiveView`
 2. implement `mount/2` (the callback for when the socket connects on page load)
@@ -220,10 +220,10 @@ Just like in Eex, we use `<%= @time %>` to print out the time. That `=` is _very
 
 (Neat fact -- you can do different delimiters for the sigils. So you could do `~L"some secret thing"`, etc; there's a number of valid delimiters. It's handy if you want to use a different symbol because you're sick of having to escape a certain character.)
 
-Here's what the whole view module looks like:
+Here's what the whole live module looks like:
 
 ```elixir
-defmodule LiveTinkeringWeb.ClockView do
+defmodule LiveTinkeringWeb.ClockLive do
   use Phoenix.LiveView
 
   def render(assigns) do
@@ -253,7 +253,7 @@ You can do this in other files as well, of course, I'm just using the basic inde
 In `lib/<your_app>_web/templates/page/index.html.eex`, you can add this bit wherever; I just deleted everything in that file and replaced it with this:
 
 ```
-<%= live_render(@conn, LiveTinkeringWeb.ClockView) %>
+<%= live_render(@conn, LiveTinkeringWeb.ClockLive) %>
 ```
 
 ---
