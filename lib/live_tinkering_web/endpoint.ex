@@ -1,6 +1,8 @@
 defmodule LiveTinkeringWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :live_tinkering
 
+  socket "/live", Phoenix.LiveView.Socket
+
   socket "/socket", LiveTinkeringWeb.UserSocket,
     websocket: true,
     longpoll: false

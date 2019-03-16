@@ -12,7 +12,8 @@ config :live_tinkering, LiveTinkeringWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "GDMQPLUkLSPoqUT8vaimRrwv6oFFFWn3ooE/g9fd6aU95V3yeTBabNCj4zc70MkZ",
   render_errors: [view: LiveTinkeringWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: LiveTinkering.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: LiveTinkering.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [signing_salt: "gqKkGatgzyF+N1umutKWxm5fuaAKDFDR"]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -21,6 +22,8 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+config :phoenix,
+  template_engines: [leex: Phoenix.LiveView.Engine]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
