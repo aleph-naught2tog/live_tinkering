@@ -16,8 +16,22 @@ body {
   padding-bottom: 2rem;
 }
 
+.phx-logo {
+  margin: 0;
+}
+
+.container {
+  max-width: unset;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+header {
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
 main + footer {
-  text-align: right;
   align-self: flex-end;
 }
 
@@ -25,8 +39,20 @@ main + footer p {
   font-size: 95%;
 }
 
-.small {
-  font-size: 90%;
+main + footer p {
+  text-align: right;
+  margin: 0;
+}
+
+.timestamp {
+  font-size: 75%;
+  margin-top: 0.75rem;
+}
+
+header p {
+  margin: 0;
+  padding: 0;
+  text-align: right;
 }
 
 .small::before {

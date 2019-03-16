@@ -31,10 +31,17 @@
       <p>
         If you'd like to see the code or try it yourself, you can see
         it <a href="https://github.com/aleph-naught2tog/live_tinkering" target="_blank">here on GitHub</a>.
+      </p>
+      <p>
+        <a href="https://twitter.com/alephnaught2tog" target="_blank" class="small">@alephnaught2tog</a>
+      </p>
+      <p class="timestamp">
+        Last deployed: <%= last_compiled() %>
         <br />
-        <a href="https://twitter.com/alephnaught2tog" class="small" target="_blank">@alephnaught2tog</a>
+        (100% a debugging timestamp 😁)
       </p>
     </footer>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script>console.log('hello, fellow human!')</script>
   </body>
 </html>
