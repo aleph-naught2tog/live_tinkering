@@ -1,4 +1,14 @@
 # LiveTinkering
+* [Initial steps](#initial-steps)
+  * [Javascript setup](#javascript-setup)
+  * [Elixir setup](#elixir-setup)
+* [Code!](#code)
+  * [`ClockView`](#clockview)
+    * [`mount/2`](#mount2)
+    * [`handle_info/2`](#handleinfo2)
+    * [`render/1`](#render1)
+  * [Adding the route](#adding-the-route)
+  * [`live_render`](#liverender)
 
 A little toy repo to show off a very unnecessarily fast-rendering clock, done with [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view).
 
@@ -8,19 +18,17 @@ Overall the setup is quite straightforward, I'm just real verbose. The blurbs be
 
 The current LiveView docs are inline yet, I think, but you can see them [here](https://github.com/phoenixframework/phoenix_live_view/blob/master/lib/phoenix_live_view.ex).
 
-## Starting setup
-
-None of this is necessary if you're cloning down the repo (I think), but this is what I did to actually get everything set up from a basic Phoenix project. 
+None of this is necessary if you're cloning down the repo (I think), but this is what I did to actually get everything set up from a basic Phoenix project.
 
 Nothing interesting beyond what the LiveView docs already say, but I like having things in one place.
 
 ## Initial steps
 
-First, create a new Phoenix project. 
+First, create a new Phoenix project.
 
 For this one, I ran `mix phx.new live_tinkering --no-ecto`. (The `--no-ecto` option is to skip adding Ecto as a dependency, since I'm not using a database here.) Go ahead and follow any prompts that come up; I think there's one about installing dependencies.
 
-We need to add `phoenix_live_view` as a dependency in our `assets` -- remember to run `npm install` after this _from your `assets` folder_. Update your `package.json` file so that `"dependencies"` looks like this. 
+We need to add `phoenix_live_view` as a dependency in our `assets` -- remember to run `npm install` after this _from your `assets` folder_. Update your `package.json` file so that `"dependencies"` looks like this.
 
 (Please note the trailing comma on the last line if you are copying and pasting; JSON is real touchy about commas.)
 
@@ -34,7 +42,7 @@ We need to add `phoenix_live_view` as a dependency in our `assets` -- remember t
 
 ### Javascript setup
 
-Since we're checking out assets anyways, let's update our `assets/js/app.js` file while we're here: 
+Since we're checking out assets anyways, let's update our `assets/js/app.js` file while we're here:
 
 ```javascript
 // assets/js/app.js
@@ -95,7 +103,7 @@ config :live_tinkering, LiveTinkeringWeb.Endpoint,
 
 Update your base web app file (for me, this is at `lib/live_tinkering_web.ex`). This is the file that has the various definitions for the Phoenix magic you get when you do something like `use LiveTinkeringWeb, :controller`.
 
-In the definition for `view` -- so in `def view do ...` -- add this line within the `quote do ... end`, after aliasing the router. 
+In the definition for `view` -- so in `def view do ...` -- add this line within the `quote do ... end`, after aliasing the router.
 
 ```elixir
 import Phoenix.LiveView, only: [live_render: 2, live_render: 3]
@@ -155,7 +163,7 @@ The router itself needs to be updated too. We need to add an extra `plug` to our
 
 ## Code!
 
-Okay, so setup is done. 
+Okay, so setup is done.
 
 Code time! _(Do note that I am doing literally zero error-handling, etc.)_
 
@@ -165,15 +173,11 @@ There are three things we need to do to make our clock:
 2. define a route for the socket to talk to
 3. add a call to `live_render` to, well, render
 
-### The LiveView module
+### `ClockView`
 
 If you look in the `views` folder in your web app lib -- usually that is in a folder like `lib/<your_app_name>_web` -- you'll see a number of `.ex` files, all with names like `page_view.ex` or `error_view.ex`.
 
-We want something similar, but in a folder parallel to it called `live`. So, once we have a folder called `lib/<your_app_name>_web/live`, let's go ahead and make our module in there.
-
-We want to have a module called `ClockView`, so we need to make a file in that folder called `clock_view.ex`.
-
-#### View code
+We want something similar, but in a folder parallel to it called `live`. So, once we have a folder called `lib/<your_app_name>_web/live`, let's go ahead and make our module in there. Since we want to have a module called `ClockView`, we need to make a file in that folder called `clock_view.ex`.
 
 Our `ClockView` module needs to do a few things:
 
@@ -184,7 +188,7 @@ Our `ClockView` module needs to do a few things:
 
 (There are some rules about what will and won't trigger a rerender; I haven't gotten into those much because I haven't needed to thus far, but they are spelled out in the Phoenix docs for LiveView.)
 
-##### `mount/2`
+#### `mount/2`
 
 > When a view is rendered from the controller, the `mount/2` callback is invoked with the provided session data and the Live View's socket. The `mount/2` callback wires up socket assigns necessary for rendering the view.
 
@@ -208,11 +212,11 @@ _(You can't go smaller than 1 ms; I tried, it doesn't work. Not because of Phoen
 
 FYI, `:update` is not a keyword or anything -- you could do `:update_timer`, `:tick`, `:meow`, etc. Any atom will work, as long as you use the same atom when you `handle_info`.
 
-##### `handle_info/2`
+#### `handle_info/2`
 
-The first parameter for this function is the message we want to handle -- in our case, we are sending an `:update` message up in `mount/2`, so here we want to match for that. (As with any other Elixir stuff, you don't _have_ to pattern match like this in the definition, but it's nice to because then you get an error if you receive a message you weren't expecting.) 
+The first parameter for this function is the message we want to handle -- in our case, we are sending an `:update` message up in `mount/2`, so here we want to match for that. (As with any other Elixir stuff, you don't _have_ to pattern match like this in the definition, but it's nice to because then you get an error if you receive a message you weren't expecting.)
 
-The second parameter is the socket. 
+The second parameter is the socket.
 
 Just like in `mount/2`, Phoenix expects a certain kind of reply. Here, you should return a result of `{:noreply, socket}` -- anything else will be an error.
 
@@ -224,7 +228,7 @@ Just like in `mount/2`, Phoenix expects a certain kind of reply. Here, you shoul
 
 (Remember -- `:update` is not a keyword, any atom will work, as long as you use the same atom in `mount` when you set the message in the timer. Pattern matching does require matching, after all!)
 
-##### `render/1`
+#### `render/1`
 
 > After mounting, `render/1` is invoked and the HTML is sent as a regular HTML response to the client .... in the connected client case, a Live View process is spawned on the server, pushes the result of `render/1` to the client and continues on for the duration of the connection
 
@@ -274,7 +278,7 @@ end
 
 ### Adding the route
 
-In our `router.ex` file, we need to add a line to our basic scope. 
+In our `router.ex` file, we need to add a line to our basic scope.
 
 Go ahead and change our `scope "/"` to look like:
 
