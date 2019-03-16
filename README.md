@@ -131,47 +131,16 @@ e.g, mine looks like:
   end
 ```
 
-Similarly, update your router to include an import of `Phoenix.LiveView.Router`. Mine ends up looking like this:
-
-```elixir
-  def router do
-    quote do
-      use Phoenix.Router
-      import Plug.Conn
-      import Phoenix.Controller
-      # this next line is the new bit
-      import Phoenix.LiveView.Router
-    end
-  end
-```
-
-The router itself needs to be updated too. We need to add an extra `plug` to our browser `pipeline` -- `plug Phoenix.LiveView.Flash`, as well as actually add the route.
-
-```elixir
-  pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    # this next line is the new bit
-    plug Phoenix.LiveView.Flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-  end
-
-  # rest of file...
-```
-
 ## Code!
 
 Okay, so setup is done.
 
 Code time! _(Do note that I am doing literally zero error-handling, etc.)_
 
-There are three things we need to do to make our clock:
+There are two things we need to do to make our clock in this case:
 
 1. make a `view` module that will contain most of the code today
-2. define a route for the socket to talk to
-3. add a call to `live_render` to, well, render
+2. add a call to `live_render` to, well, render
 
 ### `ClockView`
 
@@ -274,23 +243,6 @@ defmodule LiveTinkeringWeb.ClockView do
     {:noreply, assign(socket, :time, Time.utc_now)}
   end
 end
-```
-
-### Adding the route
-
-In our `router.ex` file, we need to add a line to our basic scope.
-
-Go ahead and change our `scope "/"` to look like:
-
-```elixir
-  scope "/", LiveTinkeringWeb do
-    pipe_through :browser
-
-    get "/", PageController, :index
-
-    # this next line is the new bit
-    live "/clock", ClockView
-  end
 ```
 
 ### `live_render`
