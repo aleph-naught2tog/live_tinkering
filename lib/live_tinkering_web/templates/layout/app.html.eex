@@ -23,8 +23,16 @@
       </section>
     </header>
     <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <%= link "Whiteboard", to: Routes.live_path(@conn, LiveTinkeringWeb.WhiteboardLive) %>
+          </li>
+        </ul>
+      </nav>
       <%= render @view_module, @view_template, assigns %>
     </main>
     <footer class="container">
