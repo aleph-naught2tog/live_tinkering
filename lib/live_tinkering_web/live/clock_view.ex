@@ -7,12 +7,10 @@ defmodule LiveTinkeringWeb.ClockView do
 
   # Called by `live_render` in our template
   def render(assigns) do
-    ~L{
-      Current time: <%= @time %>
-    }
+    ~L{Current time: <%= @time %>}
   end
 
-  # Runs once, on page load, when the socket successfully connects
+  # Runs once, on page load
   def mount(_session, socket) do
     if connected?(socket) do
       :timer.send_interval(@update_frequency, self(), :update)
