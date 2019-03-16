@@ -7,7 +7,7 @@ defmodule LiveTinkeringWeb.ClockView do
 
   # Called by `live_render` in our template
   def render(assigns) do
-    ~L{Current time: <%= @time %>}
+    ~L{Current time (UTC): <%= @time %>}
   end
 
   # Runs once, on page load
