@@ -68,7 +68,7 @@ header p {
 }
 
 /* Thank you to MDN */
-kbd {
+kbd, button.key {
     background-color: #eee;
     border-radius: 3px;
     border: 1px solid #b4b4b4;
@@ -81,4 +81,20 @@ kbd {
     line-height: 1;
     padding: 2px 4px;
     white-space: nowrap;
+}
+
+button.key {
+  height: 2.5rem;
+  min-width: 2.5rem;
+  text-align: center;
+  text-transform: unset;
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+.pressed {
+  background-color: plum !important;
 }
