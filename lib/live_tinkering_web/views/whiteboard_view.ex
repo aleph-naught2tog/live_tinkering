@@ -1,6 +1,20 @@
 defmodule LiveTinkeringWeb.WhiteboardView do
   use LiveTinkeringWeb, :view
 
+  @should_show_keyboard true
+
+  def show_keyboard do
+    if @should_show_keyboard do
+      ~E{
+        <div class="keyboard">
+          <%= for key <- keys() do %>
+            <%= print_key(key) %>
+          <% end %>
+        </div>
+      }
+    end
+  end
+
   def keys do
     ~w{
         <<open>>
@@ -20,11 +34,11 @@ defmodule LiveTinkeringWeb.WhiteboardView do
 
         <<open>>
         Z X C V B N M < > ?         <<shift>>
-        Shift z x c v b n m , . / Shift
+        ShiftLeft z x c v b n m , . / ShiftRight
         <<close>>
 
         <<open>>
-        Space
+        AltLeft MetaLeft Space MetaRight AltRight
         <<close>>
 
         Meta Ctrl Alt}
@@ -34,7 +48,6 @@ defmodule LiveTinkeringWeb.WhiteboardView do
   def print_key("<<close>>"), do: ~E{</div>}
   def print_key("<<shift>>"), do: ~E{<br />}
 
-  @key_class "key"
   def print_key(key) do
     keypress_id = "#{key}_keypress_id"
     keyup_id = "#{key}_keyup_id"

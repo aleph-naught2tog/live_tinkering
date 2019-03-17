@@ -95,6 +95,10 @@ button.key {
   letter-spacing: 0;
 }
 
+button.key.hidden {
+  display: none;
+}
+
 .pressed {
   background-color: plum !important;
 }

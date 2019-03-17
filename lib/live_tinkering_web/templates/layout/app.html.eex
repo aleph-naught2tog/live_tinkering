@@ -23,16 +23,18 @@
       </section>
     </header>
     <main role="main" class="container">
+      <!--
       <nav>
         <ul>
           <li>
             <a href="/">Home</a>
           </li>
           <li>
-            <%= link "Whiteboard", to: Routes.whiteboard_path(@conn, :index) %>
+            <%#= link "Whiteboard", to: Routes.whiteboard_path(@conn, :index) %>
           </li>
         </ul>
       </nav>
+      -->
       <%= render @view_module, @view_template, assigns %>
     </main>
     <footer class="container">
