@@ -1,0 +1,9 @@
+<label for="input_target_id">Input: </label>
+<textarea id="input_target_id" name="input_target"></textarea>
+<pre id="output"></pre>
+<%= for key <- keys() do %>
+<kbd><%= key %></kbd>
+<% end %>
+<script>
+  const inputTarget = document.getElementById("input_target_id");
+</script>

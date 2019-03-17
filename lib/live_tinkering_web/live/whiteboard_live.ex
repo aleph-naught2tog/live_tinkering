@@ -8,22 +8,17 @@ defmodule LiveTinkeringWeb.WhiteboardLive do
 
 
   def mount(_session, socket) do
-    {:ok, assign(socket, count: 0)}
+    {:ok, assign(socket, message: "")}
   end
 
-  def handle_info(:hello_from_the_socket, socket) do
-    {:noreply, socket}
+
+  def handle_event("keydown", value, socket) do
+    IO.inspect(value, label: "keydown value")
+    {:noreply, assign(socket, message: value)}
   end
 
-  def handle_event("increment", _value, socket) do
-    {:noreply, assign(socket, :count, socket.assigns[:count] + 1)}
-  end
-
-  def handle_event("decrement", _value, socket) do
-    {:noreply, assign(socket, :count, socket.assigns[:count] - 1)}
-  end
-
-  def terminate({:shutdown, :closed}, last_state) do
-    {:ok, last_state}
+  def handle_event("release", value, socket) do
+    IO.inspect(value, label: "release value")
+    {:noreply, assign(socket, message: value)}
   end
 end
