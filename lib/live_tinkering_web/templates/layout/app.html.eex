@@ -29,7 +29,7 @@
             <a href="/">Home</a>
           </li>
           <li>
-            <%= link "Whiteboard", to: Routes.live_path(@conn, LiveTinkeringWeb.WhiteboardLive) %>
+            <%= link "Whiteboard", to: Routes.whiteboard_path(@conn, :index) %>
           </li>
         </ul>
       </nav>

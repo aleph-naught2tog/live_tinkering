@@ -3,7 +3,7 @@ defmodule LiveTinkeringWeb.ClockLive do
 
   # Must be a number greater than or equal to 1
   #   Erlang only supports resolutions of 1ms or greater.
-  @update_frequency 1
+  @update_frequency 1000
 
   # Called by `live_render` in our template
   def render(assigns) do

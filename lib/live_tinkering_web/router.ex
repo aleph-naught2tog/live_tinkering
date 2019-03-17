@@ -18,7 +18,7 @@ defmodule LiveTinkeringWeb.Router do
 
     get "/", PageController, :index
 
-    live "/whiteboard", WhiteboardLive
+    get "/whiteboard", WhiteboardController, :index
   end
 
   # Other scopes may use custom stacks.
