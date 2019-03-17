@@ -7,7 +7,7 @@ defmodule LiveTinkeringWeb.WhiteboardLive do
   end
 
 
-  def mount(session, socket) do
+  def mount(_session, socket) do
     {:ok, assign(socket, count: 0)}
   end
 
@@ -19,7 +19,11 @@ defmodule LiveTinkeringWeb.WhiteboardLive do
     {:noreply, assign(socket, :count, socket.assigns[:count] + 1)}
   end
 
-   def handle_event("decrement", _value, socket) do
+  def handle_event("decrement", _value, socket) do
     {:noreply, assign(socket, :count, socket.assigns[:count] - 1)}
+  end
+
+  def terminate({:shutdown, :closed}, last_state) do
+    {:ok, last_state}
   end
 end
