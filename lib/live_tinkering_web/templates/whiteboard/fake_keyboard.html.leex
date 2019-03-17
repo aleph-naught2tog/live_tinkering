@@ -1,9 +1,37 @@
 <label for="input_target_id">Input: </label>
 <textarea id="input_target_id" name="input_target"></textarea>
 <pre id="output"></pre>
+<div class="keyboard">
 <%= for key <- keys() do %>
-<kbd><%= key %></kbd>
+  <%= print_key(key) %>
 <% end %>
+</div>
+
 <script>
+  const PRESSED_CLASS = 'pressed';
   const inputTarget = document.getElementById("input_target_id");
+  const getKey = event => event.key === ' ' ? 'Space' : event.key;
+  const handlers = {
+    keypress: event => document.getElementById(`${getKey(event)}_keypress_id`),
+    keyup: event => document.getElementById(`${getKey(event)}_keyup_id`),
+    keydown: event => document.getElementById(`${getKey(event)}_keydown_id`),
+  }
+
+  const fireKeyEvent = event => {
+    const key = handlers[event.type](event);
+    if (key) {
+      key.click();
+    }
+  };
+
+  const addPressed = event => handlers['keypress'](event).classList.add(PRESSED_CLASS);
+  const removePressed = event => handlers['keypress'](event).classList.remove(PRESSED_CLASS);
+
+  inputTarget.addEventListener('keydown', addPressed);
+  inputTarget.addEventListener('keydown', fireKeyEvent);
+
+  inputTarget.addEventListener('keypress', fireKeyEvent);
+
+  inputTarget.addEventListener('keyup', removePressed);
+  inputTarget.addEventListener('keyup', fireKeyEvent);
 </script>
