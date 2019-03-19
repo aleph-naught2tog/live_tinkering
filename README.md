@@ -9,7 +9,7 @@
     * [`render/1`](#render1)
   * [`live_render`](#liverender)
 
-A little toy repo to show off a very unnecessarily fast-rendering clock, done with [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view).
+A little toy repo to show off a very unnecessarily fast-rendering clock, done with [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view). There's also a keyboard demo in here, just haven't had a chance to write it up yet, but it _does_ have a super cute bear 🐻.
 
 _Please note that LiveView hasn't been officially released yet!_
 
