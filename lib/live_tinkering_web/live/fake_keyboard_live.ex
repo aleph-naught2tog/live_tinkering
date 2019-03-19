@@ -1,9 +1,9 @@
 defmodule LiveTinkeringWeb.FakeKeyboardLive do
   use Phoenix.LiveView
-  alias LiveTinkeringWeb.WhiteboardView
+  alias LiveTinkeringWeb.BearGameView
 
   def render(assigns) do
-    WhiteboardView.render("fake_keyboard.html", assigns)
+    BearGameView.render("fake_keyboard.html", assigns)
   end
 
   def mount(_session, socket) do
@@ -11,16 +11,17 @@ defmodule LiveTinkeringWeb.FakeKeyboardLive do
     {:ok, socket}
   end
 
-  def handle_event("keyup", value, socket) do
+  def handle_event("keyboard_proxy", <<"keyup", "::", value::binary>>, socket) do
     handle_keyboard_event("keyup", value, socket)
   end
 
-  def handle_event("keypress", value, socket) do
-    handle_keyboard_event("keypress", value, socket)
+  def handle_event("keyboard_proxy", <<"keydown", "::", value::binary>>, socket) do
+    handle_keyboard_event("keydown", value, socket)
   end
 
-  def handle_event("keydown", value, socket) do
-    handle_keyboard_event("keydown", value, socket)
+  def handle_event("reset", _, socket) do
+    send(socket.parent_pid, :reset)
+    {:noreply, socket}
   end
 
   defp handle_keyboard_event(kind, value, socket) do

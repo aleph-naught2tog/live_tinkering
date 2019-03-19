@@ -1,5 +1,10 @@
-<section id="render_target">
+<section id="render_target" style="flex-direction: column; justify-content: center; align-items: center">
   <p>
     <%= live_render(@conn, LiveTinkeringWeb.ClockLive) %>
+  </p>
+  <p>
+    <small>
+      (There's a new <a href="/bear_game">keyboard event demo</a>, too!)
+    </small>
   </p>
 </section>

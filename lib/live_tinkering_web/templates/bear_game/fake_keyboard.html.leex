@@ -1,0 +1,77 @@
+<section>
+  <div class="button-wrapper">
+    <button id="start_button_id">
+      Start
+    </button>
+    <button
+      id="reset_button_id"
+      phx-click="reset"
+    >
+      Reset
+    </button>
+  </div>
+</section>
+
+<button
+  style="display: none;"
+  phx-click="keyboard_proxy"
+  id="keyboard_button_id"
+>
+</button>
+
+<script>
+  // This prevents the arrows keys from scrolling the page
+  const SHOULD_PREVENT_DEFAULT = true;
+  const INPUT_TARGET = document;
+
+  const resetButton = document.getElementById('reset_button_id');
+  const startButton = document.getElementById('start_button_id');
+  startButton.addEventListener('click', start);
+
+  const fireKeyEvent = event => {
+    const keyboardButton = document.getElementById("keyboard_button_id");
+    keyboardButton.value = `${event.type}::${getKey(event)}`;
+    keyboardButton.click();
+    if (SHOULD_PREVENT_DEFAULT) {
+      event.preventDefault();
+    }
+  };
+
+  function start() {
+    INPUT_TARGET.addEventListener('keydown', fireKeyEvent);
+    INPUT_TARGET.addEventListener('keyup', fireKeyEvent);
+
+    startButton.addEventListener('click', stop);
+    startButton.removeEventListener('click', start);
+    startButton.innerText = "stop";
+  }
+
+  function stop() {
+    INPUT_TARGET.removeEventListener('keydown', fireKeyEvent);
+    INPUT_TARGET.removeEventListener('keyup', fireKeyEvent);
+
+    startButton.addEventListener('click', start);
+    startButton.removeEventListener('click', stop);
+    startButton.innerText = "start";
+  }
+
+  /*
+    While not necessary _here_, this allows mapping of the events to their keys
+    in a clearer manner, such as tracking _which_ `Shift` key was pressed, etc.
+  */
+  function getKey(event) {
+    switch (event.key) {
+      case "Shift":
+        return event.code;
+      case "Meta":
+        return event.code;
+      case "Alt":
+        return event.code;
+      case " ":
+        return "Space";
+      default:
+        return event.key;
+    }
+  }
+
+</script>

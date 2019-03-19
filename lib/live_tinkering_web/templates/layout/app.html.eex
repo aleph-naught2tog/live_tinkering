@@ -12,9 +12,9 @@
       <section class="container">
         <nav role="navigation">
           <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html" target="_blank">About Phoenix</a></li>
-            <li><a href="https://github.com/phoenixframework/phoenix_live_view" target="_blank">LiveView repo</a></li>
-            <li><a href="https://github.com/aleph-naught2tog/live_tinkering" target="_blank">Repo for this site</a></li>
+            <li><a href="/">Home (clock demo)</a></li>
+            <li><a href="/bear_game">Keyboard Game</a></li>
+            <li><a href="https://hexdocs.pm/phoenix/overview.html" target="_blank">Phoenix</a> / <a href="https://github.com/phoenixframework/phoenix_live_view" target="_blank">Live View</a></li>
           </ul>
         </nav>
         <a href="http://phoenixframework.org/" class="phx-logo">
@@ -23,18 +23,6 @@
       </section>
     </header>
     <main role="main" class="container">
-      <!--
-      <nav>
-        <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <%#= link "Whiteboard", to: Routes.whiteboard_path(@conn, :index) %>
-          </li>
-        </ul>
-      </nav>
-      -->
       <%= render @view_module, @view_template, assigns %>
     </main>
     <footer class="container">

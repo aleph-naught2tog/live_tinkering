@@ -102,3 +102,38 @@ button.key.hidden {
 .pressed {
   background-color: plum !important;
 }
+
+table.grid {
+  width: auto;
+  border: none;
+}
+
+table.grid td {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 2rem;
+  opacity: 0.8;
+  text-align: center;
+  font-size: 4rem;
+}
+
+header nav a {
+  display: inline;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.game-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.game-wrapper article {
+  padding: 0 5rem;
+}

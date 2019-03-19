@@ -19,13 +19,11 @@ defmodule LiveTinkeringWeb.ClockLive do
     {:ok, update_time(socket)}
   end
 
-
   def handle_info(:update, socket) do
     {:noreply, update_time(socket)}
   end
 
-
   defp update_time(socket) do
-    assign(socket, :time, Time.utc_now)
+    assign(socket, :time, Time.utc_now())
   end
 end

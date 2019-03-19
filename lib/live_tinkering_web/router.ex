@@ -18,11 +18,6 @@ defmodule LiveTinkeringWeb.Router do
 
     get "/", PageController, :index
 
-    get "/whiteboard", WhiteboardController, :index
+    get "/bear_game", BearGameController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", LiveTinkeringWeb do
-  #   pipe_through :api
-  # end
 end
