@@ -4,7 +4,7 @@ defmodule LiveTinkeringWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug Phoenix.LiveView.Flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -17,10 +17,7 @@ defmodule LiveTinkeringWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-  end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", LiveTinkeringWeb do
-  #   pipe_through :api
-  # end
+    get "/bear_game", BearGameController, :index
+  end
 end

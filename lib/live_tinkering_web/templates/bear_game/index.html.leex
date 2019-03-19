@@ -1,0 +1,37 @@
+<section class="game-wrapper">
+  <div>
+    <%= live_render(@socket, LiveTinkeringWeb.FakeKeyboardLive) %>
+    <%= grid(@grid) %>
+  </div>
+
+  <article>
+    <ul>
+      <li>
+        Press "Start/Stop" to toggle trapping keyboard events. (Default is off.)
+      </li>
+      <li>
+        Use the arrow keys (<kbd>⬆︎</kbd>,<kbd>⬇︎</kbd>,<kbd>⬅︎</kbd>,<kbd>➡︎</kbd>)
+        to navigate.
+      </li>
+      <li>"Reset" will put the grid back to its default, initial state.</li>
+    </ul>
+
+    <hr />
+
+    <p>
+      <strong>Please note this demo does use some JavaScript.</strong>
+    </p>
+
+    <p>
+      I added <em>just enough JavaScript</em> to have a start/stop
+      button, and to trap all keyboard events and have them sent server-side:
+      everything else is in Phoenix Live View.
+    </p>
+
+    <p>
+      Right now, Live View does not handle repeated key events. For something
+      like this, however, you need to fire the same key &mdash; say,
+      <kbd>⬆︎</kbd> &mdash; repeatedly to keep going up.
+    </p>
+  </article>
+</section>
